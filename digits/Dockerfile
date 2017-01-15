@@ -1,4 +1,4 @@
-FROM namikister/caffe:cuda8.0
+FROM namikister/caffe
 LABEL maintainer "Yuta Namiki <namikister@gmail.com>"
 
 ENV DIGITS_VERSION 4.0
