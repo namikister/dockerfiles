@@ -14,6 +14,8 @@ RUN apt-get update -qq && \
         git \
         language-pack-en \
         libcurl4-openssl-dev \
+        libffi-dev \
+        libssl-dev \
         python \
         python3 \
         python-dev \

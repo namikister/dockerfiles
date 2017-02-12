@@ -4,7 +4,6 @@ LABEL maintainer "Yuta Namiki <namikister@gmail.com>"
 # Python binary and source dependencies
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-        libffi-dev \
         libsqlite3-dev \
         libzmq3-dev \
         pandoc \
