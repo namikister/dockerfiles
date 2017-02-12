@@ -4,9 +4,7 @@ LABEL maintainer "Yuta Namiki <namikister@gmail.com>"
 RUN DEBIAN_FRONTEND=noninteractive apt-get remove -yq \
     python3-minimal \
     python3.4 \
-    python3.4-minimal \
-    libpython3-stdlib \
-    libpython3.4-stdlib
+    python3.4-minimal
 
 # Python binary and source dependencies
 RUN apt-get update -qq && \
