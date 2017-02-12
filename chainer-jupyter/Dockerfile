@@ -1,4 +1,4 @@
-FROM namikiser/chainer
+FROM namikister/chainer
 LABEL maintainer "Yuta Namiki <namikister@gmail.com>"
 
 # Python binary and source dependencies
