@@ -1,23 +1,51 @@
 FROM nvidia/cuda:8.0-cudnn5-devel
 LABEL maintainer "Yuta Namiki <namikister@gmail.com>"
 
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
-            python-pip \
-            python-dev \
-            build-essential \
-            git \
-            libhdf5-dev \
-            zlib1g-dev
-RUN rm -rf /var/lib/apt/lists/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get remove -yq \
+    python3-minimal \
+    python3.4 \
+    python3.4-minimal \
+    libpython3-stdlib \
+    libpython3.4-stdlib \
+    libpython3.4-minimal
 
-RUN pip install numpy==1.11
+# Python binary and source dependencies
+RUN apt-get update -qq && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+        build-essential \
+        ca-certificates \
+        curl \
+        git \
+        language-pack-en \
+        libcurl4-openssl-dev \
+        python \
+        python3 \
+        python-dev \
+        python3-dev \
+        libhdf5-dev \
+        zlib1g-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN pip install h5py
+# Install the recent pip release
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python2 get-pip.py && \
+    python3 get-pip.py && \
+    rm get-pip.py && \
+    pip2 --no-cache-dir install requests[security] && \
+    pip3 --no-cache-dir install requests[security] && \
+    rm -rf /root/.cache
+
+RUN pip2 --no-cache-dir install numpy==1.11 && \
+    pip3 --no-cache-dir install numpy==1.11
+
+RUN pip2 --no-cache-dir install h5py && \
+    pip3 --no-cache-dir install h5py
 
 ENV CUDA_PATH /usr/local/cuda
 
-RUN pip install chainer==1.19
+RUN pip2 --no-cache-dir install chainer==1.19 && \
+    pip3 --no-cache-dir install chainer==1.19
 
 ENV LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
