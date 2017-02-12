@@ -2,7 +2,6 @@ FROM nvidia/cuda:8.0-cudnn5-devel
 LABEL maintainer "Yuta Namiki <namikister@gmail.com>"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get remove -yq \
-    python3-minimal \
     python3.4 \
     python3.4-minimal
 
