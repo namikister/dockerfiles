@@ -6,8 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get remove -yq \
     python3.4 \
     python3.4-minimal \
     libpython3-stdlib \
-    libpython3.4-stdlib \
-    libpython3.4-minimal
+    libpython3.4-stdlib
 
 # Python binary and source dependencies
 RUN apt-get update -qq && \
