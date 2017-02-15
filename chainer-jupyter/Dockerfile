@@ -29,7 +29,8 @@ RUN pip2 --no-cache-dir install ipykernel && \
     rm -rf /root/.cache
 
 # Move notebook contents into place.
-ADD . /usr/src/jupyter-notebook
+# ADD . /usr/src/jupyter-notebook
+RUN git clone --branch 4.4.0 https://github.com/jupyter/notebook.git /usr/src/jupyter-notebook
 
 # Install dependencies and run tests.
 RUN BUILD_DEPS="nodejs-legacy npm" && \
