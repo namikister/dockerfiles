@@ -66,4 +66,5 @@ EXPOSE 8888
 
 ENTRYPOINT ["tini", "--"]
 
-CMD ["jupyter", "notebook", "--no-browser", "--allow-root"]
+#CMD ["jupyter", "notebook", "--no-browser", "--allow-root"]
+CMD ["jupyter", "notebook", "--no-browser"]
