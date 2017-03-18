@@ -60,6 +60,10 @@ RUN BUILD_DEPS="nodejs-legacy npm" && \
 RUN mkdir -p -m 700 /root/.jupyter/ && \
     echo "c.NotebookApp.ip = '*'" >> /root/.jupyter/jupyter_notebook_config.py
 
+RUN mkdir -p -m 700 /root/.jupyter/custom/ && \
+    echo -e \
+"require([\"codemirror/keymap/emacs\", \"notebook/js/cell\", \"base/js/namespace\"],\n    function(emacs_keymap, cell, IPython) {\n        cell.Cell.options_default.cm_config.keyMap = 'emacs';\n        var cells = IPython.notebook.get_cells();\n        for(var c=0; c< cells.length ; c++){\n            cells[c].code_mirror.setOption('keyMap', 'emacs');\n        }\n    }\n);" >> /root/.jupyter/custom/custom.js
+
 VOLUME /notebooks
 WORKDIR /notebooks
 
